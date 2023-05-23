@@ -11,8 +11,15 @@ import "../App.css";
 import styled from "styled-components";
 import osm from "../constants/osm-providers";
 import { useRef } from "react";
+import { Questionnaire } from "../components/Questionnaire";
 
 const WeightedRatingPage = (props) => {
+  const [weights, setWeights] = useState({});
+  const [questionnaireCompleted, setQuestionnaireCompleted] = useState(false);
+  const handleQuestionnaireSubmit = (weights) => {
+    setWeights(weights);
+    setQuestionnaireCompleted(true);
+  };
   const history = useHistory();
   const dispatch = useDispatch();
   const roads = useSelector(roadsSelector);
@@ -32,22 +39,26 @@ const WeightedRatingPage = (props) => {
   return (
     <Container className={`${className} mainpage container`}>
       <Header />
-      <RoadsContainer>
-        <TextField
-          className={`${className} searchfieldd`}
-          label='Шукати потяг...'
-          type='text'
-          onChange={handleSearch}
-        />
-        {roads.map((road) => (
-          <RoadCard
-            className={`${className} roadcard`}
-            {...road}
-            key={road._id}
-            onClick={handleRoadClick}
+      {!questionnaireCompleted ? (
+        <Questionnaire onSubmit={handleQuestionnaireSubmit} />
+      ) : (
+        <RoadsContainer>
+          <TextField
+            className={`${className} searchfieldd`}
+            label='Шукати потяг...'
+            type='text'
+            onChange={handleSearch}
           />
-        ))}
-      </RoadsContainer>
+          {roads.map((road) => (
+            <RoadCard
+              className={`${className} roadcard`}
+              {...road}
+              key={road._id}
+              onClick={handleRoadClick}
+            />
+          ))}
+        </RoadsContainer>
+      )}
     </Container>
   );
 };

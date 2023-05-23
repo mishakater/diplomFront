@@ -57,7 +57,7 @@ const Header = (props) => {
             onClick={handleWeightedClick}
             style={{ marginRight: "50px", cursor: "pointer" }}
           >
-            Персонализований рейтинг
+            Персоналізований рейтинг
           </Link>
         )}
 
