@@ -55,6 +55,7 @@ const WeightedRatingPage = (props) => {
               {...road}
               key={road._id}
               onClick={handleRoadClick}
+              weights={weights}
             />
           ))}
         </RoadsContainer>

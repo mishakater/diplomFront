@@ -29,8 +29,7 @@ const RoadCard = ({
       </Row>
       <Row>
         <div>
-          {mergedWeightedRatings &&
-          history.location.pathname !== "/personal-rating" ? (
+          {mergedWeightedRatings ? (
             <Rating
               readOnly
               precision={0.1}
